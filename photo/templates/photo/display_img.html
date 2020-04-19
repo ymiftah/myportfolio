@@ -5,12 +5,14 @@
 
 
  <!-- The grid: four columns -->
-<div class="row">
+<div class='container'>
+<div class="row align-middle">
   {% for img in object_list %} 
     <div class="col-sm ">
-      <img class="img-thumbnail" src="{{ img.img_file.url }}" alt="{{ img.name }}" onclick="myFunction(this);" style="overflow:auto">
+      <img class="img-thumbnail" src="{{ img.thumbnail.url }}" alt="{{ img.name }}" onclick="myFunction(this);" style="overflow:auto">
     </div>
   {% endfor %}
+</div>
 </div>
 
 <!-- The expanding image container -->
