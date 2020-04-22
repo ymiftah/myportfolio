@@ -13,9 +13,13 @@ def img_resize(image, size=IMG_SIZE):
     if image.name.endswith('jpg'):
         im.convert('RGB')
 
-    im.thumbnail(IMG_SIZE)  # resize image
+    X, Y = im.size
+    XX, YY = IMG_SIZE
+    new_size = (YY * X // Y, YY)
+    resized = im.resize(new_size)  # resize image
 
     thumb_io = BytesIO()  # create a BytesIO object
-    im.save(thumb_io, 'PNG')  # save image to BytesIO object
-    thumbnail = File(thumb_io, name="thumb"+ image.name)  # create a django friendly File object
+    resized.save(thumb_io, 'PNG')  # save image to BytesIO object
+    # create a django friendly File object
+    thumbnail = File(thumb_io, name="thumb" + image.name)
     return thumbnail

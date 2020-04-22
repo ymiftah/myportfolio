@@ -6,25 +6,25 @@
 
  <!-- The grid: four columns -->
 <div class='container'>
-<div class="row align-middle">
-  {% for img in object_list %} 
-    <div class="col-sm ">
-      <img class="img-thumbnail" src="{{ img.thumbnail.url }}" alt="{{ img.name }}" onclick="myFunction(this);" style="overflow:auto">
-    </div>
-  {% endfor %}
-</div>
-</div>
+  <div class="row">
 
-<!-- The expanding image container -->
-<div class="container">
-  <!-- Close the image -->
-  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
 
-  <!-- Expanded image -->
-  <img id="expandedImg" style="width:100%">
+  
+    {% for img in object_list %} 
+      <div class="col-md-4">
+        <img class="img-thumbnail" src="{{ img.thumbnail.url }}" alt="{{ img.name }}" onclick="myFunction(this);" style="overflow:auto; max-height: 100%; vertical-align: middle;}">
+      </div>
+    {% endfor %}
 
-  <!-- Image text -->
-  <div id="imgtext"></div>
+    <!-- Close the image -->
+    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+    <!-- Expanded image -->
+    <img id="expandedImg" style="width:100%">
+
+    <!-- Image text -->
+    <div id="imgtext"></div>
+  </div>
 </div>
 
 <script>
@@ -43,5 +43,3 @@ function myFunction(imgs) {
 </script>
 
 {% endblock %}
-
-
