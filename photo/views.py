@@ -6,8 +6,8 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView
 
-from .forms import UpPhotoForm
-from .models import UpPhoto
+from .forms import PhotoForm
+from .models import PhotoModel
 
 
 def home(request):
@@ -16,7 +16,7 @@ def home(request):
 
 
 class UploadImageView(View):
-    form_class = UpPhotoForm
+    form_class = PhotoForm
     # initial = {'name': 'None', 'img_file': None}
     template_name = 'photo/upload.html'
 
@@ -34,9 +34,34 @@ class UploadImageView(View):
 
 
 class ImagesListView(ListView):
-    model = UpPhoto
+    model = PhotoModel
     template_name = 'photo/display_img.html'
 
     # def get(self, request, *args, **kwargs):
     #     form = self.form_class()
     #     return render(request, self.template_name, {'form': form})
+
+
+
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+
+def Distort(request):
+    html = "toto.png"
+    return HttpResponse(html)
+
+# class DistortImage(APIView):
+#     """
+#     Compute distorted image from selection + parameters
+#     and respond with the path to the image
+#     """
+
+#     def post(self, request, format=None):
+#         data = request.data
+#         if data is not None:
+#             print(data)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

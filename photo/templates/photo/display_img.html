@@ -1,45 +1,71 @@
 {% extends 'photo/base.html' %}
+{% load static %}
 
 
 {% block content %}
 
-
  <!-- The grid: four columns -->
 <div class='container'>
-  <div class="row">
-
-
-  
-    {% for img in object_list %} 
-      <div class="col-md-4">
-        <img class="img-thumbnail" src="{{ img.thumbnail.url }}" alt="{{ img.name }}" onclick="myFunction(this);" style="overflow:auto; max-height: 100%; vertical-align: middle;}">
-      </div>
+  <div class="row"  id="scroll-images">
+    {% for img in object_list %}
+      <img class="im-slide-show m-1" src="{{ img.thumbnail.url }}" onclick="myFunction(this);"></li>
     {% endfor %}
 
-    <!-- Close the image -->
-    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+    <form method = "post" enctype="multipart/form-data">
+          {% csrf_token %} 
+          {% for field in form %}
+              <div class="form-group">
+                  {{ field.errors }}
+                  {{ field.label_tag }} {{ field }}
+                  {% if field.help_text %}
+                  <p class="help">{{ field.help_text|safe }}</p>
+                  {% endif %}
+              </div>
+          {% endfor %}
 
-    <!-- Expanded image -->
-    <img id="expandedImg" style="width:100%">
-
-    <!-- Image text -->
-    <div id="imgtext"></div>
+          <button type="submit"> Upload </button>
+    </form> 
   </div>
 </div>
 
-<script>
-function myFunction(imgs) {
-  // Get the expanded image
-  var expandImg = document.getElementById("expandedImg");
-  // Get the image text
-  var imgText = document.getElementById("imgtext");
-  // Use the same src in the expanded image as the image being clicked on from the grid
-  expandImg.src = imgs.src;
-  // Use the value of the alt attribute of the clickable image as text inside the expanded image
-  imgText.innerHTML = imgs.alt;
-  // Show the container element (hidden with CSS)
-  expandImg.parentElement.style.display = "block";
-} 
-</script>
 
+    <!-- Range slider image -->
+  <div class="row my-auto">
+      <div class="col-3">
+        <label for="f"class="font-weight-bold text-primary ml-2 text-align-center"> f = </label>
+        <span class="font-weight-bold text-primary ml-2 valueSpan text-align-center"></span>
+        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="f">
+        
+      </div>
+      <div class="col-3">
+        <label for="k1"class="font-weight-bold text-primary ml-2"> k1 = </label>
+        <span class="font-weight-bold text-primary ml-2 valueSpan"></span>
+        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="k1">
+      </div>
+      <div class="col-3">
+        <label for="k2"class="font-weight-bold text-primary ml-2"> k2 = </label>
+        <span class="font-weight-bold text-primary ml-2 valueSpan"></span>
+        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="k2">
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary my-1" id="sendDistort"> Distort </button>
+      </div>
+  </div>
+
+  <!-- Expanded image -->
+  <div class="row my-1">
+    <div class="col-6">
+      <img class="expandedImg" style="width:100%" id="selectionImg">
+    </div>
+    <div class="col-6">
+      <img class="expandedImg" style="width:100%">
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/scripts.js' %}"> </script>
 {% endblock %}

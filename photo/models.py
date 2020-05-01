@@ -1,11 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from .utils import img_resize
+from .utils import img_resize, img_distort
 
 
 # Create your models here.
-class UpPhoto(models.Model):
-    name = models.CharField(max_length=50)
+class PhotoModel(models.Model):
     img_file = models.ImageField(
         upload_to='images/',
         verbose_name='Image File'
@@ -16,9 +15,6 @@ class UpPhoto(models.Model):
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField()
 
-    def __str__(self):
-        return self.name
-
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:
@@ -26,4 +22,34 @@ class UpPhoto(models.Model):
         self.modified = timezone.now()
         # Resize
         self.thumbnail = img_resize(self.img_file)
-        return super(UpPhoto, self).save(*args, **kwargs)
+        return super(PhotoModel, self).save(*args, **kwargs)
+
+
+class DistortPhotoModel(models.Model):
+    # Model attributes
+    distorted = models.ImageField(
+        upload_to='distortion/',
+        verbose_name='Thumbnail File',
+        blank=True,
+        )
+    created = models.DateTimeField(editable=False)
+    modified = models.DateTimeField()
+    img_file = models.ForeignKey(PhotoModel, on_delete=models.CASCADE)
+
+    # transformation parameters
+    f = models.FloatField()
+    k1 = models.FloatField()
+    k2 = models.FloatField()
+
+    # Override save method
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created = timezone.now()
+        self.modified = timezone.now()
+
+        # Distort
+
+        self.distorted = img_distort(self.img_file.img_file,
+                                     [self.f, self.k1, self.k2])
+        return super(DistortPhotoModel, self).save(*args, **kwargs)
