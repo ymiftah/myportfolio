@@ -8,6 +8,7 @@ from django.views.generic import ListView
 
 from .forms import PhotoForm
 from .models import PhotoModel
+from .utils import img_distort
 
 
 def home(request):
@@ -43,15 +44,25 @@ class ImagesListView(ListView):
 
 
 
-from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+# from django.http import Http404
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import status
 
 
-def Distort(request):
-    html = "toto.png"
-    return HttpResponse(html)
+class Distort(View):
+    def get(self, request, pk, *args, **kwargs):
+        img = PhotoModel.objects.get(pk=pk)
+        params = [
+            request.GET.get('f', None),
+            request.GET.get('k1', None),
+            request.GET.get('k2', None)
+        ]
+
+        img = img_distort(img.img_file, params, return_img=True)
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return response
 
 # class DistortImage(APIView):
 #     """

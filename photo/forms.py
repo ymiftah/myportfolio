@@ -3,7 +3,7 @@ Forms module for the photo app
 """
 
 from django import forms
-from .models import PhotoModel, DistortPhotoModel
+from .models import PhotoModel #, DistortPhotoModel
 
 
 class PhotoForm(forms.ModelForm):
@@ -17,12 +17,12 @@ class PhotoForm(forms.ModelForm):
         fields = ['img_file']
 
 
-class DistortPhotoForm(forms.ModelForm):
-    '''
-    Simpler form to distort the selected image file.\n
-    Fields are 'img_file', 'f', 'k1', 'k2'
-    '''
+# class DistortPhotoForm(forms.ModelForm):
+#     '''
+#     Simpler form to distort the selected image file.\n
+#     Fields are 'img_file', 'f', 'k1', 'k2'
+#     '''
 
-    class Meta:
-        model = DistortPhotoModel
-        fields = ['img_file', 'f', 'k1', 'k2']
+#     class Meta:
+#         model = DistortPhotoModel
+#         fields = ['img_file', 'f', 'k1', 'k2']

@@ -5,60 +5,48 @@
 {% block content %}
 
  <!-- The grid: four columns -->
-<div class='container'>
+  <h1> Select an image </h1>
   <div class="row"  id="scroll-images">
     {% for img in object_list %}
-      <img class="im-slide-show m-1" src="{{ img.thumbnail.url }}" onclick="myFunction(this);"></li>
+      <img class="im-slide-show m-1" src="{{ img.thumbnail.url }}" alt="{{ img.id }}" onclick="myFunction(this);"></li>
     {% endfor %}
-
-    <form method = "post" enctype="multipart/form-data">
-          {% csrf_token %} 
-          {% for field in form %}
-              <div class="form-group">
-                  {{ field.errors }}
-                  {{ field.label_tag }} {{ field }}
-                  {% if field.help_text %}
-                  <p class="help">{{ field.help_text|safe }}</p>
-                  {% endif %}
-              </div>
-          {% endfor %}
-
-          <button type="submit"> Upload </button>
-    </form> 
   </div>
-</div>
 
 
     <!-- Range slider image -->
-  <div class="row my-auto">
-      <div class="col-3">
-        <label for="f"class="font-weight-bold text-primary ml-2 text-align-center"> f = </label>
-        <span class="font-weight-bold text-primary ml-2 valueSpan text-align-center"></span>
-        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="f">
-        
-      </div>
-      <div class="col-3">
-        <label for="k1"class="font-weight-bold text-primary ml-2"> k1 = </label>
-        <span class="font-weight-bold text-primary ml-2 valueSpan"></span>
-        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="k1">
-      </div>
-      <div class="col-3">
-        <label for="k2"class="font-weight-bold text-primary ml-2"> k2 = </label>
-        <span class="font-weight-bold text-primary ml-2 valueSpan"></span>
-        <input type="range" class="custom-range" min="0" max="5" step="0.5" id="k2">
-      </div>
-      <div class="col-3">
+  <h1> Parameters </h1>
+  <div class="d-flex justify-content-around">
+      <label for="f"> f </label>
+
+      <label for="k1"> k1 </label>
+
+      <label for="k2"> k2 </label>
+  </div>
+  <div class="row m-auto">
+      {% csrf_token %} 
+      <p class="valueSpan w-10"></p>
+      <input type="range" class="custom-range w-20" min="0" max="1500" step="10" id="f">
+
+      <p class="valueSpan w-10"></p>
+      <input type="range" class="custom-range w-20" min="-1" max="1" step="0.1" id="k1">
+
+      <p class="valueSpan w-10"></p>
+      <input type="range" class="custom-range w-20" min="-1" max="1" step="0.1" id="k2">
+
+      <div class="w-10">
         <button type="button" class="btn btn-primary my-1" id="sendDistort"> Distort </button>
       </div>
   </div>
 
+
+  <h1> Result </h1>
   <!-- Expanded image -->
   <div class="row my-1">
     <div class="col-6">
-      <img class="expandedImg" style="width:100%" id="selectionImg">
+      <img class="expandedImg" style="width:100%" id="selectedImg">
     </div>
     <div class="col-6">
-      <img class="expandedImg" style="width:100%">
+      <img class="expandedImg" style="width:100%" id="distortedImg">
     </div>
   </div>
 

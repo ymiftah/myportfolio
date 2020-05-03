@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('upload/', views.UploadImageView.as_view(), name='upload'),
     path('display/', views.ImagesListView.as_view(), name='display'),
-    path('display/api/distort/', views.Distort, name='distort'),
+    path('display/api/distort/<int:pk>', views.Distort.as_view(), name='distort'),
 ]

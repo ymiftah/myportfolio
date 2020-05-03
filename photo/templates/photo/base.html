@@ -15,12 +15,14 @@
 </head>
 
 
-<body>
+<body class="sb-sidenav-toggled">
 
   <!-- Fixed navbar -->
-
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark justify-content-center">
-    <a class="navbar-brand" href="#">Portfolio</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+    <a class="navbar-brand" href="#">Project Portfolio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,21 +46,20 @@
       <ul>
     </div>
   </nav>
-
-  <div class="container-fluid">
-      <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
-        <div class="sidebar-sticky">
+  
+  <div id="layoutSidenav">
+    <!-- Side bar-->
+    <div id="layoutSidenav_nav">
+      <nav class="d-none d-md-block bg-dark">
+        <div class="">
+          <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1 text-muted" >
+            <span>Applications</span>
+          </h5>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link active" href="#">
                 <i class="fas fa-camera-retro"></i>
-                Image thumbnail
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-camera-retro"></i>
-                Image warping
+                Image distortion
               </a>
             </li>
             <li class="nav-item">
@@ -87,11 +88,11 @@
             </li>
           </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
+          <h5 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span> Saved reports </span>
             <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
             </a>
-          </h6>
+          </h5>
           <ul class="nav flex-column mb-2">
             <li class="nav-item">
               <a class="nav-link" href="#">
@@ -102,12 +103,15 @@
           </ul>
         </div>
       </nav>
+    </div>
 
-      <main class="ml-sm-auto col-10" role="main">
+    <!-- content-->
+  	<div id="layoutSidenav_content">
+      <main class="container-fluid m-auto" role="main">
         {% block content %}
         {% endblock %}
       </main>
-
+    </div>
   </div>
 </body>
 

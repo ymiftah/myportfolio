@@ -29,7 +29,7 @@ def img_resize(image, size=IMG_SIZE):
     return thumbnail
 
 
-def img_distort(image, params=[500, -0.3, 0.3]):
+def img_distort(image, params=[500, -0.3, 0.3], return_img='True'):
     # helper function to distort the grid
     def transform_lens_distortion(shape, f=500, k1=-0.3, k2=0.3):
         h, w = shape
@@ -69,16 +69,11 @@ def img_distort(image, params=[500, -0.3, 0.3]):
         return uv
 
     # unzip parameters
-    f, k1, k2 = params
+    f, k1, k2 = map(float, params)
 
     img = Image.open(image)
-    # convert mode if jpg file
-    if image.name.endswith('jpg'):
-        img.convert('RGB')
 
-    img = np.array(img) 
-    # Convert RGB to BGR 
-    img = img[:, :, ::-1].copy()
+    img = np.array(img)
 
     # image size
     h, w, _ = img.shape
@@ -100,9 +95,14 @@ def img_distort(image, params=[500, -0.3, 0.3]):
 
     # Apply mask
     img2 = cv2.bitwise_and(warped, warped, mask=mask)
+    img2 = Image.fromarray(img2)
+
+    if return_img:
+        return img2
 
     thumb_io = BytesIO()  # create a BytesIO object
 
-    Image.fromarray(img2).save(thumb_io, 'PNG')  # save image to BytesIO object
+    img2.save(thumb_io, 'PNG')  # save image to BytesIO object
+
     # create a django friendly File object
     return File(thumb_io, name="distort" + image.name)
