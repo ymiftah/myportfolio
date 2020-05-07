@@ -1,9 +1,9 @@
 $(document).ready(function(){
 
-  // Toggle the side navigation
-  $("#sidebarToggle").on("click", function(e) {
-    e.preventDefault();
-    $("body").toggleClass("sb-sidenav-toggled");
+
+  // Sidebar collapse 
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
   });
 
   $('form input').change(function () {

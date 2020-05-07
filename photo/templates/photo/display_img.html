@@ -15,27 +15,31 @@
 
     <!-- Range slider image -->
   <h1> Parameters </h1>
-  <div class="d-flex justify-content-around">
-      <label for="f"> f </label>
+  <div class="row maxwidth">
+    <div class="col-11">
+      <div class="d-flex justify-content-around">
+          {% csrf_token %} 
+          <label for="f"> f </label>
+          <label for="k1"> k1 </label>
+          <label for="k2"> k2 </label>
+      </div>
+      <div class="d-flex justify-content-around">
+          {% csrf_token %} 
+          <p class="valueSpan"></p>
+          <input type="range" class="custom-range px-3" min="0" max="1500" step="10" id="f">
 
-      <label for="k1"> k1 </label>
+          <p class="valueSpan"></p>
+          <input type="range" class="custom-range px-3" min="-1" max="1" step="0.1" id="k1">
 
-      <label for="k2"> k2 </label>
-  </div>
-  <div class="row m-auto">
-      {% csrf_token %} 
-      <p class="valueSpan w-10"></p>
-      <input type="range" class="custom-range w-20" min="0" max="1500" step="10" id="f">
-
-      <p class="valueSpan w-10"></p>
-      <input type="range" class="custom-range w-20" min="-1" max="1" step="0.1" id="k1">
-
-      <p class="valueSpan w-10"></p>
-      <input type="range" class="custom-range w-20" min="-1" max="1" step="0.1" id="k2">
-
-      <div class="w-10">
+          <p class="valueSpan"></p>
+          <input type="range" class="custom-range px-3" min="-1" max="1" step="0.1" id="k2">
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="align-bottom">
         <button type="button" class="btn btn-primary my-1" id="sendDistort"> Distort </button>
       </div>
+    </div>
   </div>
 
 
