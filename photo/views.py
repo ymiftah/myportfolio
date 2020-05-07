@@ -36,7 +36,7 @@ class UploadImageView(View):
 
 class ImagesListView(ListView):
     model = PhotoModel
-    template_name = 'photo/display_img.html'
+    template_name = 'photo/distort_img.html'
 
     # def get(self, request, *args, **kwargs):
     #     form = self.form_class()
