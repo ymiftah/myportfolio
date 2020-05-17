@@ -1,17 +1,27 @@
 from django.db import models
 from django.utils import timezone
-from .utils import img_resize, img_distort
+# from .utils import img_resize, img_distort
+
+
+def get_path(instance, filename):
+    return '{0}/{1}'.format(instance.folder.name, filename)
 
 
 # Create your models here.
+class PhotoFolderModel(models.Model):
+    name = models.CharField(verbose_name="Folder name", max_length=120)
+    description = models.TextField(verbose_name='Description of the folder')
+
+    def __str__(self):
+        return self.name
+
+
 class PhotoModel(models.Model):
+    folder = models.ForeignKey(PhotoFolderModel, on_delete=models.CASCADE)
     img_file = models.ImageField(
-        upload_to='images/',
+        upload_to=get_path,
         verbose_name='Image File'
     )
-    thumbnail = models.ImageField(
-        upload_to='thumbnails/',
-        verbose_name='Thumbnail File')
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField()
 
@@ -21,35 +31,9 @@ class PhotoModel(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         # Resize
-        self.thumbnail = img_resize(self.img_file)
+        # self.thumbnail = img_resize(self.img_file)
         return super(PhotoModel, self).save(*args, **kwargs)
 
-
-# class DistortPhotoModel(models.Model):
-#     # Model attributes
-#     distorted = models.ImageField(
-#         upload_to='distortion/',
-#         verbose_name='Thumbnail File',
-#         blank=True,
-#         )
-#     created = models.DateTimeField(editable=False)
-#     modified = models.DateTimeField()
-#     img_file = models.ForeignKey(PhotoModel, on_delete=models.CASCADE)
-
-#     # transformation parameters
-#     f = models.FloatField()
-#     k1 = models.FloatField()
-#     k2 = models.FloatField()
-
-#     # Override save method
-#     def save(self, *args, **kwargs):
-#         ''' On save, update timestamps '''
-#         if not self.id:
-#             self.created = timezone.now()
-#         self.modified = timezone.now()
-
-#         # Distort
-
-#         self.distorted = img_distort(self.img_file.img_file,
-#                                      [self.f, self.k1, self.k2])
-#         return super(DistortPhotoModel, self).save(*args, **kwargs)
+    def delete(self):
+        self.img_file.delete()
+        super(PhotoModel, self).delete()

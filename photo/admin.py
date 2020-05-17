@@ -1,18 +1,18 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import PhotoModel  # ,  DistortPhotoModel
+from .models import PhotoModel, PhotoFolderModel  # ,  DistortPhotoModel
 
 
 class PhotoAdmin(admin.ModelAdmin):
     # ...
-    list_display = ('img_file', 'created')
+    list_display = ('folder', 'img_file', 'created')
 
 
-# class DistortPhotoAdmin(admin.ModelAdmin):
-#     # ...
-#     list_display = ('img_file', 'f', 'k1', 'k2', 'created')
+class PhotoFolderAdmin(admin.ModelAdmin):
+    # ...
+    list_display = ('name', 'description')
 
 
+admin.site.register(PhotoFolderModel, PhotoFolderAdmin)
 admin.site.register(PhotoModel, PhotoAdmin)
-# admin.site.register(DistortPhotoModel, DistortPhotoAdmin)

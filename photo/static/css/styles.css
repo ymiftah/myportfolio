@@ -24,6 +24,7 @@ body {
 }
 
 .im-slide-show {
+  padding: 5px;
   max-height:140px;
 }
 
@@ -270,7 +271,7 @@ a.article:hover {
   MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     #sidebar {
         min-width: 80px;
         max-width: 80px;
@@ -317,4 +318,4 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
-}
+} */

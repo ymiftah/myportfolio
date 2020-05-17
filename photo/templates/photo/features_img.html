@@ -8,7 +8,7 @@
   <h1> Select an image </h1>
   <div class="row"  id="scroll-images">
     {% for img in object_list %}
-      <img class="im-slide-show m-1" src="{{ img.img_file.url }}" alt="{{ img.id }}" onclick="myFunction(this);"></li>
+      <img class="im-slide-show" src="{{ img.img_file.url }}" alt="{{ img.id }}" onclick="myFunction(this);"></li>
     {% endfor %}
   </div>
 

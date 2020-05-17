@@ -10,13 +10,12 @@ $(document).ready(function(){
     $('form p').text(this.files.length + " file(s) selected");
   });
 
-
+  // Sliders Values
   const $valueSpan = $('.valueSpan');
   const $values = $('.custom-range');
   $valueSpan.each(function(i, el){
     $(this).html($values[i].value);
   });
-
   $values.each(function(i, el) {
     $(this).on('input change', () => {
       $valueSpan[i].innerHTML = $(this).val();
@@ -24,6 +23,7 @@ $(document).ready(function(){
     });
   });
 
+  // csrf token
   var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 
   function csrfSafeMethod(method) {
@@ -38,13 +38,13 @@ $(document).ready(function(){
       }
   });
 
+  // Send distortion parameters to API
   $("#sendDistort").on("click", () => {
-    console.log("hello");
     let selectionImg = $("#selectedImg").get(0);
     if (selectionImg.src) {
       $.ajax({
         type: "get",
-        url: "api/distort/"+selectionImg.alt,
+        url: "api/"+selectionImg.alt,
         beforeSend: function (xhr) {
           xhr.overrideMimeType('text/plain; charset=x-user-defined');
         },

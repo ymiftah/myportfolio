@@ -3,7 +3,7 @@ Forms module for the photo app
 """
 
 from django import forms
-from .models import PhotoModel #, DistortPhotoModel
+from .models import PhotoModel
 
 
 class PhotoForm(forms.ModelForm):
