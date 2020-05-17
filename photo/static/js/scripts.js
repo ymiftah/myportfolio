@@ -76,6 +76,42 @@ $(document).ready(function(){
       });
     }
   });
+
+  $("#sendFeatures").on("click", () => {
+    let selectionImg = $("#selectedImg").get(0);
+    if (selectionImg.src) {
+      $.ajax({
+        type: "get",
+        url: "api/"+selectionImg.alt,
+        beforeSend: function (xhr) {
+          xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        data: {
+          tol:  $("#tol").val(),
+        },
+        dataType: "text",
+        success: function(response, status, jqXHR) {       
+          if(response.length < 1){
+              alert("The image was not received");
+              $("#featuresImg").attr("src", "data:image/png;base64,");
+              return
+          }
+
+          var binary = "";
+          var responseText = jqXHR.responseText;
+          var responseTextLen = responseText.length;
+
+          for ( i = 0; i < responseTextLen; i++ ) {
+              binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+          }
+          $("#featuresImg").attr("src", "data:image/png;base64,"+btoa(binary));
+        },
+        error: function(xhr, status, errorThrown){
+          alert("Error in getting document "+status);
+        }
+      });
+    }
+  });
 });
 
 

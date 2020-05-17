@@ -8,7 +8,7 @@ from django.views.generic import ListView
 
 from .forms import PhotoForm
 from .models import PhotoModel
-from .utils import img_distort
+from .utils import img_distort, img_features
 
 
 def home(request):
@@ -34,9 +34,14 @@ class UploadImageView(View):
         return render(request, self.template_name, {'form': form})
 
 
-class ImagesListView(ListView):
+class DistortView(ListView):
     model = PhotoModel
     template_name = 'photo/distort_img.html'
+
+
+class FeaturesDetectorView(ListView):
+    model = PhotoModel
+    template_name = 'photo/features_img.html'
 
     # def get(self, request, *args, **kwargs):
     #     form = self.form_class()
@@ -60,6 +65,19 @@ class Distort(View):
         ]
 
         img = img_distort(img.img_file, params, return_img=True)
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return response
+
+
+class FeaturesDetector(View):
+    def get(self, request, pk, *args, **kwargs):
+        img = PhotoModel.objects.get(pk=pk)
+        params = [
+            request.GET.get('tol', 1),
+        ]
+
+        img = img_features(img.img_file, params, return_img=True)
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return response
