@@ -112,6 +112,79 @@ $(document).ready(function(){
       });
     }
   });
+
+  $("#sendMatcher").on("click", () => {
+    let selectionImg = $(".imgselected");
+    if (selectionImg.get(0).src && selectionImg.get(1).src) {
+      $.ajax({
+        type: "get",
+        url: "api/"+selectionImg.get(0).alt+"_"+selectionImg.get(1).alt,
+        beforeSend: function (xhr) {
+          xhr.overrideMimeType('text/plain; charset=x-user-defined');
+        },
+        data: {
+          num:  $("#num").val(),
+        },
+        dataType: "text",
+        success: function(response, status, jqXHR) {       
+          if(response.length < 1){
+              alert("The image was not received");
+              $("#matcherImg").attr("src", "data:image/png;base64,");
+              return
+          }
+  
+          var binary = "";
+          var responseText = jqXHR.responseText;
+          var responseTextLen = responseText.length;
+  
+          for ( i = 0; i < responseTextLen; i++ ) {
+              binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+          }
+          $("#matcherImg").attr("src", "data:image/png;base64,"+btoa(binary));
+        },
+        error: function(xhr, status, errorThrown){
+          alert("Error in getting document "+status);
+        }
+      });
+    }
+  });
+
+});
+
+$("#sendFeatures").on("click", () => {
+  let selectionImg = $(".imgselected");
+  if (selectionImg.get(0).src && selectionImg.get(1).src) {
+    $.ajax({
+      type: "get",
+      url: "api/"+selectionImg.get(0).alt+"_"+selectionImg.get(1).alt,
+      beforeSend: function (xhr) {
+        xhr.overrideMimeType('text/plain; charset=x-user-defined');
+      },
+      data: {
+        tol:  $("#num").val(),
+      },
+      dataType: "text",
+      success: function(response, status, jqXHR) {       
+        if(response.length < 1){
+            alert("The image was not received");
+            $("#matcherImg").attr("src", "data:image/png;base64,");
+            return
+        }
+
+        var binary = "";
+        var responseText = jqXHR.responseText;
+        var responseTextLen = responseText.length;
+
+        for ( i = 0; i < responseTextLen; i++ ) {
+            binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+        }
+        $("#matcherImg").attr("src", "data:image/png;base64,"+btoa(binary));
+      },
+      error: function(xhr, status, errorThrown){
+        alert("Error in getting document "+status);
+      }
+    });
+  }
 });
 
 
@@ -123,4 +196,13 @@ function myFunction(imgs) {
   expandImg.alt = imgs.alt;
   // Show the container element (hidden with CSS)
   expandImg.parentElement.style.display = "block";
+}
+
+
+function matchSelection(imgs) {
+  let nselect = document.getElementsByClassName("imgselected").length;
+  
+  if (imgs.classList.contains("imgselected") || nselect < 2) {
+    imgs.classList.toggle("imgselected");
+  }
 }

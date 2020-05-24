@@ -1,0 +1,43 @@
+{% extends 'photo/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+ <!-- The grid: four columns -->
+  <h1> Select an image </h1>
+  <div class="row"  id="scroll-images">
+    {% for img in object_list %}
+      <img class="im-slide-show" src="{{ img.img_file.url }}" alt="{{ img.id }}" onclick="matchSelection(this);"></li>
+    {% endfor %}
+  </div>
+
+
+    <!-- Range slider image -->
+  <h1> Parameters </h1>
+  <div class="row maxwidth">
+    <div class="col-11">
+        <label for="num"> Maximum number of matches </label>
+        <input type="number" min="1" id="num" value="1">
+
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-primary my-1" id="sendMatcher"> Detect </button>
+    </div>
+  </div>
+
+
+  <h1> Result </h1>
+  <!-- Expanded image -->
+  <div class="row my-1">
+    {% csrf_token %} 
+    <img class="expandedImg" style="width:90%" id="matcherImg">
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/scripts.js' %}"> </script>
+{% endblock %}

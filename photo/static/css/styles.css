@@ -32,6 +32,10 @@ body {
   background-color: #777;
 }
 
+.imgselected {
+    background-color: rgb(21, 195, 74);
+}
+
 .valueSpan {
   color: #343a40;
 }

@@ -8,7 +8,7 @@ from django.views.generic import ListView
 
 from .forms import PhotoForm
 from .models import PhotoModel
-from .utils import img_distort, img_features
+from .utils import img_distort, img_features, img_features_matcher
 
 
 def home(request):
@@ -43,10 +43,10 @@ class FeaturesDetectorView(ListView):
     model = PhotoModel
     template_name = 'photo/features_img.html'
 
-    # def get(self, request, *args, **kwargs):
-    #     form = self.form_class()
-    #     return render(request, self.template_name, {'form': form})
 
+class FeaturesMatcherView(ListView):
+    model = PhotoModel
+    template_name = 'photo/matcher_img.html'
 
 
 # from django.http import Http404
@@ -64,7 +64,7 @@ class Distort(View):
             request.GET.get('k2', None)
         ]
 
-        img = img_distort(img.img_file, params, return_img=True)
+        img = img_distort(img.img_file, params)
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return response
@@ -77,7 +77,21 @@ class FeaturesDetector(View):
             request.GET.get('tol', 1),
         ]
 
-        img = img_features(img.img_file, params, return_img=True)
+        img = img_features(img.img_file, params)
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return response
+
+
+class FeaturesMatcher(View):
+    def get(self, request, pk1, pk2, *args, **kwargs):
+        img1 = PhotoModel.objects.get(pk=pk1)
+        img2 = PhotoModel.objects.get(pk=pk2)
+        params = [
+            request.GET.get('num', 10),
+        ]
+
+        img = img_features_matcher(img1.img_file, img2.img_file, params)
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return response
