@@ -8,7 +8,7 @@ from django.views.generic import ListView
 
 from .forms import PhotoForm
 from .models import PhotoModel
-from .utils import img_distort, img_features, img_features_matcher
+from .utils.utils import img_distort, img_features, img_features_matcher, img_stitcher
 
 
 def home(request):
@@ -47,6 +47,11 @@ class FeaturesDetectorView(ListView):
 class FeaturesMatcherView(ListView):
     model = PhotoModel
     template_name = 'photo/matcher_img.html'
+
+
+class ImageStitcherView(ListView):
+    model = PhotoModel
+    template_name = 'photo/stitcher_img.html'
 
 
 # from django.http import Http404
@@ -92,6 +97,17 @@ class FeaturesMatcher(View):
         ]
 
         img = img_features_matcher(img1.img_file, img2.img_file, params)
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return response
+
+
+class ImageStitcher(View):
+    def get(self, request, pk1, pk2, *args, **kwargs):
+        img1 = PhotoModel.objects.get(pk=pk1)
+        img2 = PhotoModel.objects.get(pk=pk2)
+
+        img = img_stitcher(img1.img_file, img2.img_file)
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return response

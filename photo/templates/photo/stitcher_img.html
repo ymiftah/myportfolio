@@ -14,16 +14,8 @@
 
 
     <!-- Range slider image -->
-  <h1> Parameters </h1>
-  <div class="row maxwidth">
-    <div class="col-11">
-        <label for="num"> Maximum number of matches </label>
-        <input type="number" min="1" id="num" value="1">
-
-    </div>
-    <div class="col-1">
-        <button type="button" class="btn btn-primary my-1" id="sendMatcher"> Detect </button>
-    </div>
+  <div>
+    <button type="button" class="btn btn-primary my-1" id="sendMatcher"> Match </button>
   </div>
 
 
@@ -31,7 +23,7 @@
   <!-- Expanded image -->
   <div class="row my-1">
     {% csrf_token %} 
-    <img class="expandedImg" style="width:90%; max-width:720px" id="matcherImg">
+    <img class="expandedImg" style="width:90%" id="matcherImg">
   </div>
 
 </div>
