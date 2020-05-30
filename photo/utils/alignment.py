@@ -137,6 +137,7 @@ def alignPair(f1, f2, matches, m, nRANSAC, RANSACthresh):
     #END TODO
     return M
 
+
 def getInliers(f1, f2, matches, M, RANSACthresh):
     '''
     Input:
@@ -182,6 +183,7 @@ def getInliers(f1, f2, matches, M, RANSACthresh):
         #END TODO
 
     return inlier_indices
+
 
 def leastSquaresFit(f1, f2, matches, m, inlier_indices):
     '''
