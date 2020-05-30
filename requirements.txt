@@ -1,0 +1,9 @@
+django
+django-heroku
+django_cleanup
+gunicorn
+whitenoise
+Pillow
+scipy
+numpy
+opencv-python
