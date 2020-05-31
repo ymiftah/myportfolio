@@ -9,3 +9,4 @@ Pillow
 scipy
 numpy
 opencv-python
+python-dotenv
