@@ -1,6 +1,8 @@
 django
 django-heroku
 django_cleanup
+django-storages
+boto3
 gunicorn
 whitenoise
 Pillow
