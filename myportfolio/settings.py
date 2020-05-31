@@ -22,8 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', None)
 
-#SECRET_KEY = '28356382057trwgdfgey'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -133,11 +131,14 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'myportfolio-youssefm'
+AWS_S3_REGION_NAME = 'ap-southeast-1'
+
 # Media files (Uploaded Images)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 # REST APIs
 
