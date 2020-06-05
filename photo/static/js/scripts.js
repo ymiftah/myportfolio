@@ -115,6 +115,7 @@ $(document).ready(function(){
 
   $("#sendMatcher").on("click", () => {
     let selectionImg = $(".imgselected");
+    $("#matcherImg").addClass("loader");
     if (selectionImg.get(0).src && selectionImg.get(1).src) {
       $.ajax({
         type: "get",
@@ -140,6 +141,7 @@ $(document).ready(function(){
           for ( i = 0; i < responseTextLen; i++ ) {
               binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
           }
+          $("#matcherImg").removeClass("loader")
           $("#matcherImg").attr("src", "data:image/png;base64,"+btoa(binary));
         },
         error: function(xhr, status, errorThrown){
