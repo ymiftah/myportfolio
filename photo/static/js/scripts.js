@@ -77,7 +77,7 @@ $(document).ready(function(){
     }
   });
 
-  $("#sendFeatures").on("click", () => {
+  $("#sendDetectFeatures").on("click", () => {
     let selectionImg = $("#selectedImg").get(0);
     if (selectionImg.src) {
       $.ajax({
