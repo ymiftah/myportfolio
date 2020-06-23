@@ -5,7 +5,7 @@ from . import views
 app_name = 'photo'
 urlpatterns = [
      # HTML
-     path('', views.DistortView.as_view(), name='home'),
+     path('', views.HomeView.as_view(), name='home'),
      path('upload/', views.UploadImageView.as_view(), name='upload'),
      path('distort/', views.DistortView.as_view(), name='distort'),
      path('features/', views.FeaturesDetectorView.as_view(), name='features'),

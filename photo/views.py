@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from .forms import PhotoForm
 from .models import PhotoModel
@@ -15,6 +15,8 @@ def home(request):
     ''' Return a basic hello world view'''
     return HttpResponse("Hello, world. You're at the polls index.")
 
+class HomeView(TemplateView):
+    template_name = 'photo/home.html'
 
 class UploadImageView(View):
     form_class = PhotoForm

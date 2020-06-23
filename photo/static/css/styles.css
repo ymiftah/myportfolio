@@ -3,8 +3,17 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
     padding-top: 3.5rem;
-    background-color: #ff957c ;
+    background-color: #166fa3 ;
 }
+
+/*
+ * Navbar
+ */
+
+ .nav-link {
+    color: #f8f8f8;
+ }
+
 
 /*
  * Content
@@ -83,17 +92,33 @@ form button:active{
   border:0;
 }
 
+.content-text {
+  color: #f8f8f8;
+}
+
 /*
     DEMO STYLE
 */
 
-p {
+/* p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
     color: #999;
+} */
+
+.content-text a, a:focus {
+    color: #68d6c0;
+    text-decoration: none;
+    transition: all 0.3s;
 }
+
+.content-text a:hover {
+  color: #fdfdfd;
+  background-color: #68d6c0;
+}
+
 
 a,
 a:hover,
@@ -185,7 +210,7 @@ span {
 #sidebar .sidebar-header {
     text-align: center;
     padding-top: 1rem;
-    background: #6d7ecc00;
+    background: #2698bb00;
 }
 
 #sidebar .sidebar-header strong {
@@ -216,7 +241,7 @@ span {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #22a2dd;
 }
 
 a[data-toggle="collapse"] {
@@ -234,7 +259,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #2698bb00;
 }
 
 ul.CTAs {
@@ -333,11 +358,9 @@ a.article:hover {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 120px !important;
+    height: 120px !important;
     animation: spin 2s linear infinite;
-    margin-left: 5%;
-
   }
   
   @keyframes spin {

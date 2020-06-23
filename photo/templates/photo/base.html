@@ -26,19 +26,19 @@
     <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="navbarCollapse">
       <ul class="navbar-nav mx-auto text-center">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'photo:distort' %}"> Computer Vision App </a>
+          <a class="nav-link" href="{% url 'photo:home' %}"> Computer Vision App </a>
         </li>
-        <li class="nav-item">
+        {% comment %} <li class="nav-item">
           <a class="nav-link" href="{% url 'photo:distort' %}"> Operations Reseacrh </a>
-        </li>
+        </li> {% endcomment %}
       </ul>
 
       <ul class="nav navbar-nav text-center">
         <li class="nav-item">
-          <a class="nav-link p-2" href="#"> <i class="fab fa-linkedin-in"></i> </a>
+          <a class="nav-link p-2" href="https://linkedin.com/in/youssefmiftah"> <i class="fab fa-linkedin-in"></i> </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link p-2" href="#"><i class="fab fa-github"></i> </a>
+          <a class="nav-link p-2" href="https://github.com/ymiftah"><i class="fab fa-github"></i> </a>
         </li>
       <ul>
     </div>
@@ -82,7 +82,7 @@
                     AI for vision
                 </a>
                 <ul class="collapse list-unstyled" id="aiSubmenu">
-                    <li>
+                    {% comment %} <li>
                         <a href="{% url 'photo:distort' %}"> Image distortion </a>
                     </li>
                     <li>
@@ -90,28 +90,7 @@
                     </li>
                     <li>
                         <a href="#"> Image stitching </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-briefcase"></i>
-                    About
-                </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-copy"></i>
-                    Pages
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </li>
         </ul>

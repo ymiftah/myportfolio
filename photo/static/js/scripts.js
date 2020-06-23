@@ -41,6 +41,7 @@ $(document).ready(function(){
   // Send distortion parameters to API
   $("#sendDistort").on("click", () => {
     let selectionImg = $("#selectedImg").get(0);
+    $("#distortedImg").addClass("loader")
     if (selectionImg.src) {
       $.ajax({
         type: "get",
@@ -68,6 +69,7 @@ $(document).ready(function(){
           for ( i = 0; i < responseTextLen; i++ ) {
               binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
           }
+          $("#distortedImg").removeClass("loader")
           $("#distortedImg").attr("src", "data:image/png;base64,"+btoa(binary));
         },
         error: function(xhr, status, errorThrown){
@@ -79,6 +81,7 @@ $(document).ready(function(){
 
   $("#sendDetectFeatures").on("click", () => {
     let selectionImg = $("#selectedImg").get(0);
+    $("#featuresImg").addClass("loader");
     if (selectionImg.src) {
       $.ajax({
         type: "get",
@@ -104,6 +107,7 @@ $(document).ready(function(){
           for ( i = 0; i < responseTextLen; i++ ) {
               binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
           }
+          $("#featuresImg").removeClass("loader")
           $("#featuresImg").attr("src", "data:image/png;base64,"+btoa(binary));
         },
         error: function(xhr, status, errorThrown){
@@ -155,6 +159,7 @@ $(document).ready(function(){
 
 $("#sendFeatures").on("click", () => {
   let selectionImg = $(".imgselected");
+  $("#matcherImg").addClass("loader")
   if (selectionImg.get(0).src && selectionImg.get(1).src) {
     $.ajax({
       type: "get",
@@ -180,6 +185,7 @@ $("#sendFeatures").on("click", () => {
         for ( i = 0; i < responseTextLen; i++ ) {
             binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
         }
+        $("#matcherImg").removeClass("loader")
         $("#matcherImg").attr("src", "data:image/png;base64,"+btoa(binary));
       },
       error: function(xhr, status, errorThrown){
