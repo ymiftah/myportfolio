@@ -48,53 +48,51 @@
   <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
-        <div class="sidebar-header px-1">
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
-            <i class="fas fa-bars"></i>
-            <span>Toggle Sidebar</span>
-          </button>
-        </div>
+      <div class="sidebar-header px-1">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+          <i class="fas fa-bars"></i>
+          <span>Toggle Sidebar</span>
+        </button>
+      </div>
 
-         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#cvSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-images"></i>
-                    Computer Vision
-                </a>
-                <ul class="collapse list-unstyled" id="cvSubmenu">
-                    <li>
-                        <a href="{% url 'photo:distort' %}"> Image distortion </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'photo:features' %}"> Image features detection</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'photo:matcher' %}"> Image features matching</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'photo:stitcher' %}"> Image stitching </a>
-                    </li>
-                </ul>
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a href="#cvSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-images"></i> Computer Vision
+          </a>
+          <ul class="collapse list-unstyled" id="cvSubmenu">
+            <li>
+              <a href="{% url 'photo:distort' %}"> Image distortion </a>
             </li>
-            <li >
-                <a href="#aiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-camera-retro"></i>
-                    AI for vision
-                </a>
-                <ul class="collapse list-unstyled" id="aiSubmenu">
-                    {% comment %} <li>
-                        <a href="{% url 'photo:distort' %}"> Image distortion </a>
-                    </li>
-                    <li>
-                        <a href="#"> Image features detection</a>
-                    </li>
-                    <li>
-                        <a href="#"> Image stitching </a>
-                    </li> {% endcomment %}
-                </ul>
+            <li>
+              <a href="{% url 'photo:features' %}"> Image features detection</a>
             </li>
-        </ul>
+            <li>
+              <a href="{% url 'photo:matcher' %}"> Image features matching</a>
+            </li>
+            <li>
+              <a href="{% url 'photo:stitcher' %}"> Image stitching </a>
+            </li>
+          </ul>
+        </li>
 
+        <li>
+          <a href="#aiSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-camera-retro"></i> AI for vision
+          </a>
+          <ul class="collapse list-unstyled" id="aiSubmenu">
+            <li>
+                <a href="{% url 'photo:distort' %}"> Image distortion </a>
+            </li>
+            <li>
+                <a href="#"> Image features detection</a>
+            </li>
+            <li>
+                <a href="#"> Image stitching </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
 
     <!-- Page Content  -->
